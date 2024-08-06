@@ -5,10 +5,7 @@ import '../Models/match.dart';
 import '../Models/round.dart';
 
 class TournamentRepository {
-  List<Player> players = [
-    Player(id: '1', name: 'Player 1', image: 'assets/images/player.png', score: Random().nextInt(101)),
-    Player(id: '2', name: 'Player 2', image: 'assets/images/player.png', score: Random().nextInt(101)),
-  ];
+  List<Player> players = [];
 
   List<Round> rounds = [];
 
@@ -60,8 +57,14 @@ class TournamentRepository {
   }
 
   void addPlayer(Player player) {
+
     players.add(player);
     rounds = [Round(roundNumber: 1, matches: createInitialMatches(players))];
+    print("Logcatplease "+roundsToString());
+
+    for(int i=0; i<getRounds().length; i++){
+      proceedToNextRound();
+    }
   }
 
   void proceedToNextRound() {
@@ -72,5 +75,28 @@ class TournamentRepository {
       print('Winner: ${nextRoundMatches[0].players[0].name}');
     }
   }
+  List<Round> getRounds() {
+    return rounds;
+  }
 
+  String roundsToString() {
+    return rounds.map((round) {
+      return 'Round ${round.roundNumber}:\n' +
+          round.matches.map((match) {
+            String matchString = '  Match ${match.matchNumber}:\n' +
+                match.players.map((player) {
+                  return '    Player: ${player.name}, Score: ${player.score}';
+                }).join('\n');
+            if (match.players.length == 1) {
+              matchString += '\n    Winner: ${match.players[0].name}';
+            } else {
+              Player winner = match.players[0].score > match.players[1].score
+                  ? match.players[0]
+                  : match.players[1];
+              matchString += '\n    Winner: ${winner.name}';
+            }
+            return matchString;
+          }).join('\n');
+    }).join('\n\n');
+  }
 }

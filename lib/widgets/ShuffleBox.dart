@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'ShuffleBtn.dart';
+import 'buttons/ShuffleBtn.dart';
 
 class ShuffleBox extends StatelessWidget {
   final VoidCallback onShufflePressed;

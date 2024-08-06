@@ -5,7 +5,6 @@ abstract class TournamentEvent {}
 
 class AddPlayerEvent extends TournamentEvent {
   final Player player;
-
   AddPlayerEvent(this.player);
 }
 
