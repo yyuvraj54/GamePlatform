@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import 'buttons/ShuffleBtn.dart';
@@ -9,35 +10,38 @@ class ShuffleBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20,0,20,0),
-      child: Container(
-        padding: EdgeInsets.all(8.0), // Add padding for better spacing
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.white38, width: 1.5), // Border color and width
-          borderRadius: BorderRadius.circular(0.0), // Curve the corners
-        ),
-        child: Row(
-          children: [
-            // Image
-            Image.asset(
+    return Container(
+      padding: EdgeInsets.all(8.0), // Add padding for better spacing
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.white38, width: 1.5), // Border color and width
+        borderRadius: BorderRadius.circular(0.0), // Curve the corners
+      ),
+      child: Row(
+        children: [
+          // Image
+          Expanded(
+            flex: 1,
+            child: Image.asset(
               'assets/images/shuffle.png',
               fit: BoxFit.scaleDown,
-              width: 50,
-              height: 50,
-            ),
 
-            // Text
-            Container(
+            ),
+          ),
+
+          // Text
+          Expanded(
+            flex: 5,
+            child: Container(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  AutoSizeText(
                     "SHUFFLE THE MATCHES",
+                    maxLines: 1,
                     style: TextStyle(
                       fontFamily: "poppins",
                       fontWeight: FontWeight.bold,
-                      fontSize: 14,
+                      fontSize: 9,
                       color: Colors.white,
                     ),
                   ),
@@ -48,7 +52,7 @@ class ShuffleBox extends StatelessWidget {
                         style: TextStyle(
                           fontFamily: "poppins",
                           fontWeight: FontWeight.bold,
-                          fontSize: 8,
+                          fontSize: 6,
                           color: Colors.white,
                         ),
                       ),
@@ -57,7 +61,7 @@ class ShuffleBox extends StatelessWidget {
                         style: TextStyle(
                           fontFamily: "poppins",
                           fontWeight: FontWeight.bold,
-                          fontSize: 8,
+                          fontSize: 6,
                           color: Colors.green,
                         ),
                       ),
@@ -66,17 +70,19 @@ class ShuffleBox extends StatelessWidget {
                 ],
               ),
             ),
+          ),
 
-            // Shuffle Btn
-            Container(
-              width: 220,
+          // Shuffle Btn
+          Expanded(
+            flex: 3,
+            child: Container(
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Shufflebtn(onPressed: onShufflePressed),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

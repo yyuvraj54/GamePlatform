@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import '../Models/player.dart';
 
@@ -31,29 +32,31 @@ class Playercard extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      SizedBox(width: 40.0), // Space for the overlapping image
+                      SizedBox(width: 20.0), // Space for the overlapping image
                       // Text
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            AutoSizeText(
+                              maxLines: 1,
                               player.name,
                               style: TextStyle(
                                 fontFamily: "poppins",
                                 fontWeight: FontWeight.bold,
-                                fontSize: 16,
+                                fontSize: 12,
                                 color: Colors.white,
                               ),
                               overflow: TextOverflow.ellipsis, // Handles long names
                             ),
                             SizedBox(height: 4.0),
-                            Text(
+                            AutoSizeText(
+                              maxLines: 1,
                               "GT ID ${player.id}",
                               style: TextStyle(
                                 fontFamily: "poppins",
                                 fontWeight: FontWeight.bold,
-                                fontSize: 12,
+                                fontSize: 10,
                                 color: Colors.green,
                               ),
                               overflow: TextOverflow.ellipsis,
@@ -69,12 +72,13 @@ class Playercard extends StatelessWidget {
                           height: 80,
                           color: Colors.white,
                           alignment: Alignment.center,
-                          child: Text(
+                          child: AutoSizeText(
+                            maxLines: 1,
                             player.score.toString(),
                             style: TextStyle(
                               fontFamily: "poppins",
                               fontWeight: FontWeight.bold,
-                              fontSize: 16,
+                              fontSize: 12,
                               color: Colors.black,
                             ),
                           ),

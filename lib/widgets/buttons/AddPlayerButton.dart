@@ -11,11 +11,11 @@ class AddPlayerBtn extends StatelessWidget {
       onPressed: onPressed, // Use the passed callback
       child: Icon(
         Icons.add, // Plus icon
-        size: 30.0, // Icon size
+        size: 23,
       ),
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white, // Icon color
-        backgroundColor: Colors.red, // Button background color
+        backgroundColor: Color(0xFFD51933), // Button background color
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.zero, // Square button
         ),

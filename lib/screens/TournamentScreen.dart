@@ -17,30 +17,36 @@ import '../widgets/popbox/popWidget.dart';
 class TournamentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double maxWidth = screenWidth ;
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Column(
         children: [
           TopBar(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ShuffleBox(onShufflePressed: () {}),
-              AddPlayerBtn(onPressed: () {
-                showAddPlayerDialog(context, (name, gamerId) {
-                  BlocProvider.of<TournamentBloc>(context).add(
-                    AddPlayerEvent(
-                      Player(
-                        id: gamerId,
-                        name: name,
-                        image: 'assets/images/player.png',
-                        score: Random().nextInt(101),
+          FractionallySizedBox(
+            widthFactor: 0.90,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Expanded(child: ShuffleBox(onShufflePressed: () {})),
+                AddPlayerBtn(onPressed: () {
+                  showAddPlayerDialog(context, (name, gamerId) {
+                    BlocProvider.of<TournamentBloc>(context).add(
+                      AddPlayerEvent(
+                        Player(
+                          id: gamerId,
+                          name: name,
+                          image: 'assets/images/player.png',
+                          score: Random().nextInt(101),
+                        ),
                       ),
-                    ),
-                  );
-                });
-              }),
-            ],
+                    );
+                  });
+                }),
+              ],
+            ),
           ),
           Expanded(
             child: BlocBuilder<TournamentBloc, TournamentState>(
