@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import '../Models/player.dart';
 
+enum GradientType { green, gold, none }
+
 class Playercard extends StatelessWidget {
   final Player player;
+  final GradientType gradientType;
 
-  const Playercard({Key? key, required this.player}) : super(key: key);
+  const Playercard({Key? key, required this.player, this.gradientType = GradientType.none}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -80,10 +83,59 @@ class Playercard extends StatelessWidget {
                     ],
                   ),
                 ),
+
+                // Gradient Overlay
+                if (gradientType != GradientType.none) ...[
+                  Positioned.fill(
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: Container(
+                        height: 50, // Adjust height as needed
+                        decoration: BoxDecoration(
+                          gradient: gradientType == GradientType.green
+                              ? LinearGradient(
+                            colors: [Colors.green.withOpacity(0.5), Colors.transparent],
+                            begin: Alignment.topCenter,
+                            end: Alignment.center,
+                          )
+                              : gradientType == GradientType.gold
+                              ? LinearGradient(
+                            colors: [Colors.amber.withOpacity(0.5), Colors.transparent],
+                            begin: Alignment.topCenter,
+                            end: Alignment.center,
+                          )
+                              : null,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned.fill(
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        height: 50, // Adjust height as needed
+                        decoration: BoxDecoration(
+                          gradient: gradientType == GradientType.green
+                              ? LinearGradient(
+                            colors: [Colors.transparent, Colors.green.withOpacity(0.5)],
+                            begin: Alignment.center,
+                            end: Alignment.bottomCenter,
+                          )
+                              : gradientType == GradientType.gold
+                              ? LinearGradient(
+                            colors: [Colors.transparent, Colors.amber.withOpacity(0.5)],
+                            begin: Alignment.center,
+                            end: Alignment.bottomCenter,
+                          )
+                              : null,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
                 Positioned(
                   left: -40.0, // Adjust this value to control the overlap
                   child: Image.asset(
-                    alignment: Alignment.center,
                     "assets/images/player.png",
                     fit: BoxFit.fill,
                     width: 100,

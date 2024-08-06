@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:task/bloc/home_bloc.dart';
-import 'package:task/screens/Home.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:task/screens/TournamentScreen.dart';
+import 'bloc/tournament_bloc.dart';
+import 'repositories/tournament_repository.dart';
 
 void main() {
-  runApp( BlocProvider(
-    create: (context) => HomeBloc(),
-      child:  MyApp())
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    // Create an instance of TournamentRepository
+    final tournamentRepository = TournamentRepository();
+
+    return BlocProvider(
+      // Provide TournamentBloc with the repository
+      create: (context) => TournamentBloc(tournamentRepository),
+      child: MaterialApp(
+        title: 'Tournament App',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: TournamentScreen(),
       ),
-      home:  TournamentScreen(),
     );
   }
 }
