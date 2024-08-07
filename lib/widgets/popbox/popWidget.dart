@@ -43,11 +43,12 @@ void showAddPlayerDialog(BuildContext context, Function(String, String) onConfir
                           ),
                           SizedBox(height: 20),
                           TextField(
+                            style: TextStyle(color: Colors.white),
                             controller: playerNameController,
                             decoration: InputDecoration(
                               labelText: 'Enter Player Name',
                               labelStyle: TextStyle(
-                                color: Colors.grey.shade200,
+                                color: Colors.blueGrey,
                               ),
                               filled: true,
                               fillColor: Color(0xFF2E2E2E),
@@ -61,11 +62,12 @@ void showAddPlayerDialog(BuildContext context, Function(String, String) onConfir
                             maxLength: 16,
                           ),
                           TextField(
+                            style: TextStyle(color: Colors.white),
                             controller: gamerIdController,
                             decoration: InputDecoration(
                               labelText: 'Enter Player Gamer ID',
                               labelStyle: TextStyle(
-                                color: Colors.grey.shade200,
+                                color: Colors.blueGrey,
                               ),
                               filled: true,
                               fillColor: Color(0xFF7B2727),
@@ -76,9 +78,10 @@ void showAddPlayerDialog(BuildContext context, Function(String, String) onConfir
                                 ),
                               ),
                             ),
-                            maxLength: 16,
+                            maxLength: 8,
                           ),
                           Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               ElevatedButton(
@@ -87,10 +90,21 @@ void showAddPlayerDialog(BuildContext context, Function(String, String) onConfir
                                   backgroundColor: Colors.transparent, // Makes button background transparent
                                   shadowColor: Colors.transparent, // Removes shadow
                                 ),
-                                child: Text("Cancel"),
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
+                                child: Stack(
+                                  alignment: Alignment.bottomRight,
+                                  children: [
+                                    Image.asset(
+                                      'assets/images/CancelBtn.png', // Your image path
+                                      fit: BoxFit.fitWidth,
+                                      width: 140, // Adjust the width as needed
+                                      height: 70, // Adjust the height as needed
+                                    ),
+
+                                  ],
+                                ),
                               ),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
@@ -98,14 +112,26 @@ void showAddPlayerDialog(BuildContext context, Function(String, String) onConfir
                                   backgroundColor: Colors.transparent, // Makes button background transparent
                                   shadowColor: Colors.transparent, // Removes shadow
                                 ),
-                                child: Text("Confirm"),
                                 onPressed: () {
                                   onConfirm(playerNameController.text, gamerIdController.text);
                                   Navigator.of(context).pop();
                                 },
+                                child: Stack(
+                                  alignment: Alignment.bottomLeft,
+                                  children: [
+                                    Image.asset(
+                                      'assets/images/ConfirmBtn.png', // Your image path
+                                      fit: BoxFit.fitWidth,
+                                      width: 140, // Adjust the width as needed
+                                      height: 70, // Adjust the height as needed
+                                    ),
+
+                                  ],
+                                ),
                               ),
                             ],
-                          ),
+                          )
+
                         ],
                       ),
                     ),

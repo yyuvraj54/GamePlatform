@@ -16,28 +16,35 @@ class RoundWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int matchNumber = 1;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Center(
-          child: Text('Quarter Finals: ${round.roundNumber}', style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
+          child: Text('Quarter Finals: ${round.roundNumber}', style: TextStyle(color: Colors.white, fontSize:   20, fontWeight: FontWeight.bold)),
         ),
         SizedBox(height: 20),
-        ...round.matches.map((match) => MatchWidget(match: match)).toList(),
-      ],
+        ...round.matches.map((match) {
+            final widget = MatchWidget(match: match, matchNumber: matchNumber);
+            matchNumber++;
+            return widget;
+        }).toList(),
+
+    ],
     );
   }
 }
 
-// Repeat similar adjustments for other widgets like MatchWidget, PlayerCard, etc.
 
 class MatchWidget extends StatelessWidget {
   final Match match;
+  final int matchNumber;
 
-  MatchWidget({required this.match});
+  MatchWidget({required this.match, required this.matchNumber});
 
   @override
   Widget build(BuildContext context) {
+
     // Determine gradient types based on player scores
     GradientType getGradientType(Player player, List<Player> opponents) {
       if (opponents.isEmpty) {
@@ -57,15 +64,11 @@ class MatchWidget extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            'Match ${match.matchNumber}',
-            style: TextStyle(
-              fontFamily: "poppins",
-              fontWeight: FontWeight.bold,
-              fontSize: 12,
-              color: Colors.green,
-            ),
+            'Match ${matchNumber}',
+            style: TextStyle(fontFamily: "poppins", fontWeight: FontWeight.bold, fontSize: 12, color: Colors.green,),
           ),
           ...match.players.map((player) {
+
             List<Player> opponents = match.players.where((p) => p != player).toList();
             return Playercard(
               player: player,

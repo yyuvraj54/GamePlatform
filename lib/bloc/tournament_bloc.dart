@@ -11,14 +11,14 @@ class TournamentBloc extends Bloc<TournamentEvent, TournamentState> {
   TournamentBloc(this.repository) : super(TournamentInitial()) {
     on<AddPlayerEvent>((event, emit) {
       repository.addPlayer(event.player);
-      emit(TournamentUpdated(repository.rounds));
+      emit(TournamentUpdated(repository.rounds,repository.getStageName(repository.rounds.length)));
     });
     on<ProceedToNextRound>((event, emit) {
       repository.proceedToNextRound();
-      emit(TournamentUpdated(repository.rounds));
+      emit(TournamentUpdated(repository.rounds,repository.getStageName(repository.rounds.length)));
     });
     on<InitializeTournament>((event, emit) {
-      emit(TournamentUpdated(repository.rounds));
+      emit(TournamentUpdated(repository.rounds,repository.getStageName(repository.rounds.length)));
     });
   }
 }

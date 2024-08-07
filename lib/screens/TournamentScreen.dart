@@ -1,5 +1,6 @@
 // lib/screens/tournament_screen.dart
 import 'dart:math';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/tournament_bloc.dart';
@@ -19,6 +20,8 @@ class TournamentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double maxWidth = screenWidth ;
+
+
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -56,13 +59,23 @@ class TournamentScreen extends StatelessWidget {
                     itemCount: state.rounds.length,
                     itemBuilder: (context, index) {
                       Round round = state.rounds[index];
+
                       return Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: ListView.builder(
-                          itemCount: round.matches.length,
-                          itemBuilder: (context, matchIndex) {
-                            return MatchWidget(match: round.matches[matchIndex]);
-                          },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Center(child: AutoSizeText(maxLines: 1,'Round: ${round.roundNumber}', style: TextStyle(color: Colors.white,fontSize: 24.0, fontWeight: FontWeight.bold,),)),
+                            Expanded(
+                              child: ListView.builder(
+                                itemCount: round.matches.length,
+                                itemBuilder: (context, matchIndex) {
+
+                                  return MatchWidget(match: round.matches[matchIndex],matchNumber: matchIndex + 1);
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                       );
                     },

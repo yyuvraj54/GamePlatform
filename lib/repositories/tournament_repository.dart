@@ -79,6 +79,19 @@ class TournamentRepository {
     return rounds;
   }
 
+  String getStageName(int numberOfPlayers) {
+    if (numberOfPlayers <= 2) {
+      return 'Final';
+    } else if (numberOfPlayers == 3) {
+      return 'Semi-Final';
+    } else if (numberOfPlayers <= 5) {
+      return 'Quarter-Final';
+    } else {
+      return 'Round $numberOfPlayers';
+    }
+  }
+
+
   String roundsToString() {
     return rounds.map((round) {
       return 'Round ${round.roundNumber}:\n' +

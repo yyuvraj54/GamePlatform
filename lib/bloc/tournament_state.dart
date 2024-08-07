@@ -11,5 +11,7 @@ class TournamentInitial extends TournamentState {
 
 class TournamentUpdated extends TournamentState {
   final List<Round> rounds;
-  TournamentUpdated(this.rounds);
+  final String stageName;
+
+  TournamentUpdated(this.rounds,this.stageName);
 }
